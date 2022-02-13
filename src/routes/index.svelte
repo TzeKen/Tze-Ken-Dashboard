@@ -217,7 +217,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr class="table-secondary">
 		<th scope="row" class="table-dark">Monday</th>
         {#each timetable.Monday as timeslot,index}
         <td colspan={timeslot.period} class={timeslot.style}>
@@ -225,7 +225,7 @@
 		</td>
         {/each}
 	  </tr>
-      <tr>
+      <tr class="table-secondary">
         <th scope="row" class="table-dark">Tuesday</th>
         {#each timetable.Tuesday as timeslot,index}
         <td colspan={timeslot.period} class={timeslot.style}>
@@ -233,7 +233,7 @@
 		</td>
         {/each}
       </tr>
-      <tr>
+      <tr class="table-secondary">
         <th scope="row" class="table-dark">Wednesday</th>
 		{#each timetable.Wednesday as timeslot,index}
         <td colspan={timeslot.period} class={timeslot.style}>
@@ -241,7 +241,7 @@
 		</td>
         {/each}
       </tr>
-      <tr>
+      <tr class="table-secondary">
         <th scope="row" class="table-dark">Thursday</th>
 		{#each timetable.Thursday as timeslot,index}
         <td colspan={timeslot.period} class={timeslot.style}>
@@ -249,7 +249,7 @@
 		</td>
         {/each}
       </tr>
-      <tr>
+      <tr class="table-secondary">
         <th scope="row" class="table-dark">Friday</th>
 		{#each timetable.Friday as timeslot,index}
         <td colspan={timeslot.period} class={timeslot.style}>
