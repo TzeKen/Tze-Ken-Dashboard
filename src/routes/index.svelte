@@ -192,7 +192,9 @@
     	style: "",
   	},
 	],
-  };
+
+};
+
 
   function addtimeSlot(day) {
 	if (day=="Monday") {
@@ -240,7 +242,34 @@ function showCurData(day,index,name,period,style) {
 	curPeriod=period;
 	curStyle=style;
 }
-	
+
+function deleteTimeSlot(day, index){
+	if (day === "Monday") {
+		timetable.Monday.splice(index, 1);
+		timetable = timetable;
+	  }
+  
+	else if (day === "Tuesday") {
+		timetable.Tuesday.splice(index, 1);
+		timetable = timetable;
+	  }
+  
+	else if (day === "Wednesday") {
+		timetable.Wednesday.splice(index, 1);
+		timetable = timetable;
+	  }
+  
+	else if (day === "Thursday") {
+		timetable.Thursday.splice(index, 1);
+		timetable = timetable;
+	  }
+  
+	else if (day === "Friday") {
+		timetable.Friday.splice(index, 1);
+		timetable = timetable;
+	  }
+  }	
+
 </script>
 <h1>My Dashboard</h1>
 <h2>My school timetable</h2>
@@ -326,7 +355,7 @@ function showCurData(day,index,name,period,style) {
 		<button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#edittimeSlot" 
 		on:click={() =>
 			showCurData(
-			  "Thusrday",
+			  "Thursday",
 			  index,
 			  timeSlot.name,
 			  timeSlot.period,
@@ -393,10 +422,16 @@ function showCurData(day,index,name,period,style) {
 				  <option value="table-secondary">Grey</option>
 				</select>
 			  </div>
+
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-danger" >Delete</button>
+		  <button
+      	  type="button"
+      	  class="btn btn-danger"
+      	  data-bs-dismiss="modal"
+      	  on:click={() => deleteTimeSlot(curDay, curIndex)}>Delete</button>
+
 		  <button type="button" class="btn btn-primary" >Save changes</button>
 		</div>
 	  </div>
