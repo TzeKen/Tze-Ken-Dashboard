@@ -268,7 +268,60 @@ function deleteTimeSlot(day, index){
 		timetable.Friday.splice(index, 1);
 		timetable = timetable;
 	  }
-  }	
+	  saveEntry();
+  }
+
+  function setTimeSlot(day, index, newName, newPeriod, newStyle) {
+	  if (day === "Monday") {
+		  timetable.Monday[index].name = newName;
+		  timetable.Monday[index].period = newPeriod;
+		  timetable.Monday[index].style = newStyle;
+	  }	 
+	  else if (day === "Tuesday") {
+		  timetable.Tuesday[index].name = newName;
+		  timetable.Tuesday[index].period = newPeriod;
+		  timetable.Tuesday[index].style = newStyle;
+	  }
+	  else if (day === "Wednesday") {
+	      timetable.Wednesday[index].name = newName;
+		  timetable.Wednesday[index].period = newPeriod;
+		  timetable.Wednesday[index].style = newStyle;
+	  }
+	  else if (day === "Thursday") {
+	      timetable.Thursday[index].name = newName;
+		  timetable.Thursday[index].period = newPeriod;
+		  timetable.Thursday[index].style = newStyle;
+	  }
+	  else {
+	      timetable.Friday[index].name = newName;
+		  timetable.Friday[index].period = newPeriod;
+		  timetable.Friday[index].style = newStyle;
+	  }
+	  saveEntry();
+  }
+  
+  async function saveEntry() {
+  const { error } = await supabase.from("studentEntries").upsert(
+    {
+      user_id: supabase.auth.user().id,
+      timetable: timetable,
+    },
+    { onConflict: "user_id" }
+  );
+  if (error) alert(error.message);
+}
+
+// Get entries
+async function getEntries() {
+  const { data, error } = await supabase.from("studentEntries").select();
+  if (error) alert(error.message);
+
+  if (data != "") {
+    timetable = data[0].timetable;
+  }
+}
+
+getEntries();
 
 </script>
 <h1>My Dashboard</h1>
@@ -432,7 +485,7 @@ function deleteTimeSlot(day, index){
       	  data-bs-dismiss="modal"
       	  on:click={() => deleteTimeSlot(curDay, curIndex)}>Delete</button>
 
-		  <button type="button" class="btn btn-primary" >Save changes</button>
+		  <button type="button" class="btn btn-primary" on:click={()=>{setTimeSlot(curDay, curIndex, curName, curPeriod, curStyle)}}>Save changes</button>
 		</div>
 	  </div>
 	</div>
